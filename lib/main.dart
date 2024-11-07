@@ -154,7 +154,7 @@ Future<void> createIconsFromConfig(
     );
   }
   if (flutterConfigs.isNeedingNewIOSIcon) {
-    ios_launcher_icons.createIcons(flutterConfigs, flavor);
+    await ios_launcher_icons.createIcons(flutterConfigs, flavor);
   }
 
   // Generates Icons for given platform

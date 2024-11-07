@@ -66,7 +66,7 @@ List<IosIconTemplate> iosIcons = <IosIconTemplate>[
 ];
 
 /// create the ios icons
-void createIcons(Config config, String? flavor) {
+Future<void> createIcons(Config config, String? flavor) async {
   // TODO(p-mazhnik): support prefixPath
   final String? filePath = config.getImagePathIOS();
   final String? darkFilePath = config.imagePathIOSDarkTransparent;
@@ -157,7 +157,7 @@ void createIcons(Config config, String? flavor) {
       tintedIconName = tintedCatalogName;
     }
     iconName = iosDefaultIconName;
-    changeIosLauncherIcon(catalogName, flavor);
+    await changeIosLauncherIcon(catalogName, flavor);
     modifyContentsFile(catalogName, darkIconName, tintedIconName);
   } else if (iosConfig is String) {
     // If the IOS configuration is a string then the user has specified a new icon to be created
@@ -182,7 +182,7 @@ void createIcons(Config config, String? flavor) {
       }
     }
     iconName = newIconName;
-    changeIosLauncherIcon(iconName, flavor);
+    await changeIosLauncherIcon(iconName, flavor);
     modifyContentsFile(iconName, darkIconName, tintedIconName);
   }
   // Otherwise the user wants the new icon to use the default icons name and
@@ -207,7 +207,7 @@ void createIcons(Config config, String? flavor) {
       tintedIconName = iosDefaultIconName + '-Tinted';
     }
     iconName = iosDefaultIconName;
-    changeIosLauncherIcon('AppIcon', flavor);
+    await changeIosLauncherIcon('AppIcon', flavor);
     // Still need to modify the Contents.json file
     // since the user could have added dark and tinted icons
     modifyDefaultContentsFile(iconName, darkIconName, tintedIconName);
